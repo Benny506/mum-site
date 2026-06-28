@@ -1,0 +1,14 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Outfit", sans-serif;
+}
+body{
+  background:#f5f5f5
+}
+button {
+  border: none;
+}

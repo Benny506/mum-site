@@ -1,0 +1,61 @@
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  animation: scroll 40s linear infinite;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.quote-watermark {
+  opacity: 0.1;
+}
+
+.quote-watermark-top {
+  font-size: 150px;
+  top: -40px;
+  left: -10px;
+}
+
+.quote-watermark-bottom {
+  font-size: 150px;
+  bottom: -60px;
+  right: -10px;
+}
+
+@media (min-width: 768px) {
+  .quote-watermark {
+    opacity: 0.1;
+  }
+  .quote-watermark-top {
+    font-size: 400px;
+    top: -100px;
+    left: 10%;
+  }
+  .quote-watermark-bottom {
+    font-size: 400px;
+    bottom: -200px;
+    right: 10%;
+  }
+}

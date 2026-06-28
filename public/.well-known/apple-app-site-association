@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "XXXXXXXXXX.com.controlgenesis.mum",
+        "paths": ["/download", "/download/*"]
+      }
+    ]
+  }
+}

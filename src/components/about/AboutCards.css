@@ -1,0 +1,209 @@
+/* AboutCards.css */
+
+.about-card {
+  border-radius: 24px;
+  min-height: 380px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+/* 1. Freshers Card */
+.freshers-card {
+  background-color: #FA0808; /* UNIMAP Red */
+  min-height: 600px;
+}
+
+.freshers-grid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center bottom;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+}
+
+.freshers-center {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+}
+
+.pulse-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120px; height: 120px;
+  margin: -60px 0 0 -60px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.4);
+  animation: pulse 2.5s infinite ease-out;
+  opacity: 0; /* hidden until animation starts */
+}
+
+.pulse-ring.delay {
+  animation-delay: 1.25s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.center-pin {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.orbit-container {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.orbit-avatar {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  border: 3px solid white;
+}
+.orbit-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.orbit-pos-0 { top: 0; left: 120px; }
+.orbit-pos-1 { bottom: 0; left: 120px; }
+.orbit-pos-2 { top: 120px; left: 0; }
+.orbit-pos-3 { top: 120px; right: 0; }
+
+
+/* 2. Returning Card */
+.returning-card {
+  background-color: #222222;
+}
+
+.returning-grid-bg {
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background-image: 
+    linear-gradient(#333 1px, transparent 1px),
+    linear-gradient(90deg, #333 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: pan-grid 20s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes pan-grid {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-60px, -60px); }
+}
+
+.returning-pin {
+  position: absolute;
+  top: 50%; left: 30%;
+  transform: translate(-50%, -50%);
+  width: 90px; height: 90px;
+  background: white;
+  border-radius: 50% 50% 10px 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 5;
+}
+
+.repel-avatar {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  border: 3px solid #444;
+  z-index: 10;
+}
+.repel-1 { top: 20%; right: 20%; width: 60px; height: 60px; }
+.repel-2 { bottom: 20%; right: 40%; width: 80px; height: 80px; }
+
+
+/* 3. Visitors Card */
+.visitors-card {
+  background-color: #FDF2F2;
+}
+
+.visitors-wave {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FAD4D4' fill-opacity='0.4' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.visitors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(250,8,8,0.05);
+}
+
+.visitor-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* 4. Campus Collage */
+.campus-collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.campus-photo-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  will-change: border-radius;
+}
+
+.campus-photo {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}

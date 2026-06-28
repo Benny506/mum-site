@@ -1,0 +1,9 @@
+.collapseMargin {
+  max-width: 800px;
+  margin: 15px auto 0px auto;
+}
+@media (max-width: 768px) {
+  .collapseMargin {
+    margin: 15px 20px;
+  }
+}

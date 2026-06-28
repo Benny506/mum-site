@@ -1,0 +1,79 @@
+/* FeaturesPhone.css */
+.features-phone {
+  width: 340px;
+  height: 690px;
+  border-radius: 50px;
+  border: 12px solid #ce1010;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), inset 0 0 0 4px #000;
+  margin: 0 auto;
+}
+
+.phone-scale-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* For dual column layout on Desktop */
+.phone-scale-wrapper .features-phone {
+  transform: scale(0.65);
+}
+
+@media (max-width: 1200px) {
+  .phone-scale-wrapper .features-phone {
+    transform: scale(0.55);
+  }
+}
+
+/* For stacked layout on Tablet / Mobile */
+@media (max-width: 991px) {
+  .phone-scale-wrapper .features-phone {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 500px) {
+  .phone-scale-wrapper .features-phone {
+    transform: scale(0.75);
+  }
+}
+
+@media (max-width: 400px) {
+  .phone-scale-wrapper .features-phone {
+    transform: scale(0.65);
+  }
+}
+
+.features-island {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 28px;
+  background-color: #000;
+  border-radius: 20px;
+  z-index: 100;
+}
+.features-screen-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #f9f9f9;
+}
+
+.blink-cursor {
+  font-weight: 200;
+  color: #FA0808;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

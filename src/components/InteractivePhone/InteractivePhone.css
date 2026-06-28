@@ -1,0 +1,290 @@
+/* InteractivePhone.css */
+.iphone-frame {
+  width: 340px;
+  height: 690px;
+  border-radius: 50px;
+  border: 12px solid #ce1010; /* The red metallic edge */
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), inset 0 0 0 4px #000;
+  margin: 0 auto;
+}
+
+/* Dynamic Island */
+.dynamic-island {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 28px;
+  background-color: #000;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+/* Map Background Layer */
+.map-layer {
+  position: absolute;
+  width: 600px;
+  height: 1000px;
+  top: -200px;
+  left: -100px;
+  background-color: #E8E5DF; /* Google Maps land color */
+  overflow: hidden;
+}
+
+/* SVG Roads to make it look like a map */
+.map-roads {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(45deg, transparent 48%, #ffffff 48%, #ffffff 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, #ffffff 48%, #ffffff 52%, transparent 52%);
+  background-size: 150px 150px;
+  opacity: 0.8;
+}
+
+/* SVG Route Line */
+.route-svg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.route-path {
+  fill: none;
+  stroke: #4285F4; /* Google Maps Blue */
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0px 2px 4px rgba(66, 133, 244, 0.3));
+}
+
+/* Search Bar Overlay */
+.search-bar {
+  position: absolute;
+  top: 100px;
+  left: 15px;
+  right: 15px;
+  background: white;
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Search Modal Overlay */
+.search-modal {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #f9f9f9;
+  z-index: 150;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.modal-header {
+  padding: 15px 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-list {
+  flex: 1;
+  background: white;
+  margin-top: 10px;
+}
+.modal-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+.modal-icon {
+  width: 32px;
+  height: 32px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-icon img {
+  width: 16px;
+}
+
+/* Simulated Touch Cursor */
+.touch-cursor {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  z-index: 200;
+  pointer-events: none;
+  transform-origin: center center;
+  margin-left: -20px;
+  margin-top: -20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.phone-header {
+  position: absolute;
+  top: 45px;
+  left: 15px;
+  right: 15px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  z-index: 50;
+}
+
+.hamburger {
+  width: 20px;
+  height: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: black;
+  border-radius: 2px;
+}
+.hamburger span:nth-child(2) { width: 70%; }
+
+.unimap-logo {
+  color: #FA0808;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+/* Markers */
+.marker-you {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(66, 133, 244, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.marker-you-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #4285F4;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Floating Marker Cards */
+.marker-card {
+  position: absolute;
+  top: -45px;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: nowrap;
+}
+.you-card {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dest-card {
+  left: 50%;
+  transform: translateX(-50%);
+  top: -40px;
+}
+.marker-profile {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.marker-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+.marker-username {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+}
+
+.marker-dest {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FA0808;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Floating Preview Panel */
+.preview-panel {
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  right: 15px;
+  background: white;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.preview-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  object-fit: contain;
+  padding: 10px;
+}
+.preview-text {
+  flex: 1;
+}
+.preview-title {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+.preview-dest {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+}

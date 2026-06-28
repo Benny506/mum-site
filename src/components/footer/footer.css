@@ -1,0 +1,60 @@
+.footer-container {
+    background-color: #121212;
+}
+
+.footer-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.5;
+    animation: floatBlob 10s ease-in-out infinite;
+}
+
+.blob-red {
+    background: radial-gradient(circle, #FA0808 0%, transparent 70%);
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    left: -100px;
+}
+
+.blob-blue {
+    background: radial-gradient(circle, #228be6 0%, transparent 70%);
+    width: 500px;
+    height: 500px;
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -5s;
+}
+
+.blob-yellow {
+    background: radial-gradient(circle, #FFD700 0%, transparent 70%);
+    width: 350px;
+    height: 350px;
+    top: 20%;
+    left: 40%;
+    animation-delay: -2s;
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+.hover-scale {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.hover-scale:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+}
+
+.hover-opacity {
+    transition: opacity 0.2s ease-in-out;
+}
+.hover-opacity:hover {
+    opacity: 0.7;
+}

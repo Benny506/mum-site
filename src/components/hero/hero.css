@@ -1,0 +1,66 @@
+.spacing-50-adjusted{
+    padding: 20px 77px;
+}
+.wavyBackground{
+    background-image: url(../../assets/images/wavyLine.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+}
+@media (max-width: 768px) {
+  .spacing-50-adjusted {
+    padding: 10px 20px;
+  }
+}
+
+/* Ambient Background Glow */
+.hero-ambient-blob {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  background: radial-gradient(circle, rgba(250, 8, 8, 0.15) 0%, transparent 60%);
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseBlob 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseBlob {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+/* Floating Tags */
+.glass-tag {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 10px 16px;
+  border-radius: 20px;
+  position: absolute;
+  z-index: 20;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.float-slow {
+  animation: floatUpAndDown 4s ease-in-out infinite;
+}
+.float-slower {
+  animation: floatUpAndDown 5s ease-in-out infinite 1s;
+}
+
+@keyframes floatUpAndDown {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
