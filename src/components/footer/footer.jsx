@@ -31,39 +31,39 @@ function Footer() {
           PRE-FOOTER CTA (Lottie Showcase)
       ======================================================== */}
       <div className="container text-center mb-5 pb-5 position-relative" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', zIndex: 1 }}>
-        <div className="fs-32 fw-600 text-white mb-5">Your Campus, Simplified.</div>
+        <div className="section-title text-white mb-5">Your Campus, Simplified.</div>
 
         <div className="row justify-content-center align-items-end mb-5 gap-5 gap-md-0">
           <div className="col-12 col-md-4 d-flex flex-column align-items-center">
             <div style={{ height: 220 }} className="d-flex align-items-end">
               <Lottie animationData={lottieNavigate} loop={true} style={{ height: '100%' }} />
             </div>
-            <div className="text-white fw-500 fs-19 mt-4 px-2">Explore effortlessly without getting lost.</div>
+            <div className="text-white card-title fw-500 mt-4 px-2">Explore effortlessly without getting lost.</div>
           </div>
 
           <div className="col-12 col-md-4 d-flex flex-column align-items-center">
             <div style={{ height: 220 }} className="d-flex align-items-end">
               <Lottie animationData={lottieFriends} loop={true} style={{ height: '90%' }} />
             </div>
-            <div className="text-white fw-500 fs-19 mt-4 px-2">Stay connected with friends on the go.</div>
+            <div className="text-white card-title fw-500 mt-4 px-2">Stay connected with friends on the go.</div>
           </div>
 
           <div className="col-12 col-md-4 d-flex flex-column align-items-center">
             <div style={{ height: 220 }} className="d-flex align-items-end">
               <Lottie animationData={lottieJump} loop={true} style={{ height: '100%' }} />
             </div>
-            <div className="text-white fw-500 fs-19 mt-4 px-2">Refer, climb the ranks, and win big.</div>
+            <div className="text-white card-title fw-500 mt-4 px-2">Refer, climb the ranks, and win big.</div>
           </div>
         </div>
 
         <div className="d-flex justify-content-center align-items-center gap-3 mt-4 flex-wrap">
           <Link to="/download" className="text-decoration-none d-inline-block">
-            <div className="d-inline-flex align-items-center gap-2 bg-danger text-white px-5 py-3 rounded-pill fw-bold fs-19 shadow-lg hover-scale transition border border-danger">
+            <div className="d-inline-flex align-items-center gap-2 bg-danger text-white px-5 py-3 rounded-pill btn-text shadow-lg hover-scale transition border border-danger">
               Download App
             </div>
           </Link>
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="text-decoration-none d-inline-block">
-            <div className="d-inline-flex align-items-center gap-2 bg-white text-danger px-5 py-3 rounded-pill fw-bold fs-19 shadow-lg hover-scale transition">
+            <div className="d-inline-flex align-items-center gap-2 bg-white text-danger px-5 py-3 rounded-pill btn-text shadow-lg hover-scale transition">
               <BsWhatsapp size={24} />
               Contact Support
             </div>
@@ -82,7 +82,7 @@ function Footer() {
             <div className="d-flex justify-content-center justify-content-md-start">
               <img src={footerLogoWithName} alt="Logo" style={{ maxWidth: 200 }} />
             </div>
-            <div className="fs-14 fw-400 opacity-75">
+            <div className="text-small opacity-75">
               MyUniMap is a trademark of Control Genesis, dedicated to building smart, student-focused tools that make everyday campus life simpler, seamless, and stress-free.
             </div>
             {/* <div className="d-flex gap-3 justify-content-center justify-content-md-start mt-2">
@@ -95,12 +95,12 @@ function Footer() {
 
           {/* Credits & Legal */}
           <div className="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-end gap-3 text-center text-md-end">
-            <div className="fs-19 fw-700">Built by Students, for Students</div>
+            <div className="card-title fw-700">Built by Students, for Students</div>
             <a href="https://controlgenesis.com/" target="_blank" rel="noopener noreferrer" className="mt-2 text-decoration-none">
-              <div className="opacity-75 fs-12 mb-1 text-white">FROM</div>
+              <div className="opacity-75 text-tiny mb-1 text-white">FROM</div>
               <img src={companyLogo} alt="Control Genesis" style={{ maxWidth: 150 }} />
             </a>
-            <div className="fs-12 opacity-50 mt-3 d-flex gap-2 justify-content-center justify-content-md-end flex-wrap">
+            <div className="text-tiny opacity-50 mt-3 d-flex gap-2 justify-content-center justify-content-md-end flex-wrap">
               <span>© 2025 Control Genesis.</span>
               <span>All rights reserved.</span>
               {/* <span className="cursor hover-opacity text-decoration-underline mx-1">Privacy & Terms</span> */}

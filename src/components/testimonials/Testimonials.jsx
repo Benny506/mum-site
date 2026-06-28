@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import quotation from "../../assets/images/quotation.png";
 import testimonial1 from "../../assets/images/testimonial1.png";
 import testimonial2 from "../../assets/images/testimonial2.png";
@@ -34,9 +35,8 @@ const testimonialsData = [
 
 const TestimonialCard = ({ data }) => (
   <div
-    className="d-flex flex-column justify-content-between shadow-sm"
+    className="d-flex flex-column justify-content-between shadow-sm testimonial-card"
     style={{
-      width: "450px",
       borderRadius: "15px",
       background: "#FFFBFB",
       padding: "30px",
@@ -47,20 +47,30 @@ const TestimonialCard = ({ data }) => (
     <div>
       <img src={quotation} alt="quote" style={{ width: 30 }} />
     </div>
-    <div className="fs-16 fw-500 mt-4 mb-4" style={{ minHeight: "80px", color: '#444' }}>
+    <div className="text-body fw-500 mt-4 mb-4" style={{ minHeight: "80px", color: '#444' }}>
       "{data.text}"
     </div>
     <div className="d-flex align-items-center">
       <img src={data.img} alt={data.name} style={{ width: 45, height: 45, borderRadius: '50%', objectFit: 'cover' }} />
       <div className="ms-3">
-        <div className="fs-14 fw-600">{data.name}</div>
-        <div className="fw-400 fs-12 text-muted">{data.level}</div>
+        <div className="text-small fw-600">{data.name}</div>
+        <div className="text-tiny text-muted">{data.level}</div>
       </div>
     </div>
   </div>
 );
 
 export default function Testimonials() {
+  const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      // scroll by slightly less than the card width to keep peeking effect
+      const scrollAmount = direction === 'left' ? -280 : 280;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="spacing-50 my-5 py-5 position-relative overflow-hidden">
 
@@ -79,17 +89,36 @@ export default function Testimonials() {
       </div>
 
       <div className="text-center mb-5 px-3 position-relative" style={{ zIndex: 1 }}>
-        <div className="fs-32 fw-600">What Students Are Saying</div>
-        <div className="fs-16 fw-400 mt-3 text-muted">
+        <div className="section-title">What Students Are Saying</div>
+        <div className="section-desc mt-3 text-muted">
           Real Voices. Real Experiences.
         </div>
       </div>
-      <div className="marquee-container py-3 position-relative" style={{ zIndex: 1 }}>
-        {/* Render 2 identical blocks for seamless infinite looping */}
+
+      {/* Mobile Scroll Arrows */}
+      <div className="d-flex justify-content-end gap-3 pe-3 mb-3 d-md-none position-relative" style={{ zIndex: 2 }}>
+        <button 
+          className="btn btn-light rounded-circle shadow-sm d-flex justify-content-center align-items-center" 
+          style={{ width: '40px', height: '40px' }}
+          onClick={() => scroll('left')}
+        >
+          <FaChevronLeft className="text-danger" />
+        </button>
+        <button 
+          className="btn btn-light rounded-circle shadow-sm d-flex justify-content-center align-items-center" 
+          style={{ width: '40px', height: '40px' }}
+          onClick={() => scroll('right')}
+        >
+          <FaChevronRight className="text-danger" />
+        </button>
+      </div>
+
+      <div className="marquee-container py-3 position-relative" style={{ zIndex: 1 }} ref={scrollRef}>
+        {/* Render 2 identical blocks for seamless infinite looping on desktop */}
         <div className="marquee-content">
           {testimonialsData.map((t, i) => <TestimonialCard key={i} data={t} />)}
         </div>
-        <div className="marquee-content">
+        <div className="marquee-content d-none d-md-flex">
           {testimonialsData.map((t, i) => <TestimonialCard key={`dup-${i}`} data={t} />)}
         </div>
       </div>

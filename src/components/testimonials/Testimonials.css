@@ -28,6 +28,28 @@
   }
 }
 
+.testimonial-card {
+  width: 85vw;
+  max-width: 450px;
+}
+
+@media (max-width: 767px) {
+  .marquee-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+  .marquee-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+  }
+  .marquee-content {
+    animation: none !important; /* Stop auto-scroll on mobile */
+  }
+  .testimonial-card {
+    scroll-snap-align: center;
+  }
+}
+
 .quote-watermark {
   opacity: 0.1;
 }

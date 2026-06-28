@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 function About() {
   return (
-    <div className="spacing-50 mt-4 d-flex flex-column align-items-center">
+    <div className="spacing-50 mt-5 pt-5 d-flex flex-column align-items-center">
+      <div className="pt-5 mt-lg-5 mt-0 mt-md-0" />
       <div className="text-center" style={{ maxWidth: "569px" }}>
-        <div className="fs-32 fw-600">We Know the Struggle</div>
-        <div className="fs-16 fw-400">
+        <div className="section-title">We Know the Struggle</div>
+        <div className="section-desc mt-2">
           Not knowing where an office, lecture hall, or restroom is can be
           frustrating — from losing the best seats in class to trekking across
           campus just to find the one restroom you know.
@@ -26,10 +27,10 @@ function About() {
           <CampusCollage />
         </div>
         <div className="text-start" style={{ maxWidth: "520px" }}>
-          <div className="fs-32 fw-600">
+          <div className="section-title">
             Your Campus Mapped Like Never Before
           </div>
-          <div className="fs-16 fw-400 my-4">
+          <div className="section-desc my-4">
             We built an app that shows every spot on campus — with real photos,
             directions, and even friend tracking. From classes to offices to
             that suya joint your friend mentioned, you’ll get there without the
@@ -37,7 +38,7 @@ function About() {
           </div>
           <Link to="/download" className="text-decoration-none">
             <button
-              className="d-flex align-items-center fs-16"
+              className="d-flex align-items-center btn-text"
               style={{
                 backgroundColor: "#FA0808",
                 borderRadius: "40px",
@@ -47,7 +48,7 @@ function About() {
                 cursor: "pointer"
               }}
             >
-              <p className="mb-0 fw-500">Get started for free</p>
+              <p className="mb-0">Get started for free</p>
             </button>
           </Link>
         </div>

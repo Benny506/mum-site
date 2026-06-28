@@ -72,21 +72,21 @@ function DownloadModal({ onClose }) {
             )}
           </div>
           
-          <div className="fs-23 fw-600 mt-4 text-dark">{status}</div>
+          <div className="card-title mt-4 text-dark">{status}</div>
           
           {/* Desktop Fallback: QR Code & Link */}
           {deviceFound === 'desktop' && (
             <div className="mt-4 d-flex flex-column align-items-center w-100">
-              <div className="text-muted fs-15 mb-4">
+              <div className="text-muted card-desc mb-4">
                 Scan this QR code with your iPhone or Android camera to download MyUniMap.
               </div>
               <div className="p-2 bg-white border rounded-3 shadow-sm mb-4">
                 <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(APP_DOWNLOAD_URL)}`} alt="QR Code" style={{ width: 150, height: 150 }} />
               </div>
               <div className="w-100 text-start">
-                <div className="fs-12 fw-bold text-muted mb-1 text-uppercase">Or copy this link</div>
+                <div className="text-tiny fw-bold text-muted mb-1 text-uppercase">Or copy this link</div>
                 <div className="d-flex w-100 border rounded-3 overflow-hidden">
-                  <div className="bg-light p-3 flex-grow-1 fs-14 text-truncate text-muted border-end">
+                  <div className="bg-light p-3 flex-grow-1 text-small text-truncate text-muted border-end">
                     {APP_DOWNLOAD_URL}
                   </div>
                   <button onClick={handleCopy} className="border-0 bg-white px-4 hover-opacity d-flex align-items-center gap-2 text-danger fw-bold">

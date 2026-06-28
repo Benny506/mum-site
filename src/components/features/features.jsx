@@ -23,8 +23,8 @@ const FeatureCard = ({ title, desc, screenType, badge }) => (
     )}
 
     <div style={{ minHeight: '120px', maxWidth: '400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-      <div className="fs-30 fw-600 mb-2">{title}</div>
-      <div className="fs-16 fw-400 opacity-75">{desc}</div>
+      <div className="card-title mb-2">{title}</div>
+      <div className="card-desc opacity-75">{desc}</div>
     </div>
     <div className="phone-scale-wrapper" style={{ height: "60vh", minHeight: "450px", marginTop: "20px", position: 'relative', zIndex: 2 }}>
       <FeaturesPhone screenType={screenType} />

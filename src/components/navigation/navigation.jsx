@@ -43,7 +43,7 @@ function Navigation() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <p className="mb-0 fw-500 fs-16">Download</p>
+            <p className="mb-0 btn-text">Download</p>
           </motion.button>
         </Link>
       </div>

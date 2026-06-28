@@ -63,9 +63,9 @@ export default function HowItWorks() {
         
         {/* Left Side: Text */}
         <div className="col-12 col-lg-5 text-start mb-5 mb-lg-0">
-          <div className="text-danger fw-bold mb-2" style={{ letterSpacing: 1 }}>COMPETITIONS & REWARDS</div>
-          <div className="fs-43 fw-600 mb-3">Refer, Climb, and Win Big.</div>
-          <div className="fs-19 fw-400 opacity-75 mb-5" style={{ maxWidth: 500 }}>
+          <div className="text-danger text-tiny fw-bold mb-2" style={{ letterSpacing: 1 }}>COMPETITIONS & REWARDS</div>
+          <div className="section-title mb-3">Refer, Climb, and Win Big.</div>
+          <div className="section-desc opacity-75 mb-5" style={{ maxWidth: 500 }}>
             We're giving away exclusive prizes, cash, and merchandise to our top referrers. Share Unimap, climb the leaderboard, and secure your spot at the top.
           </div>
           
@@ -76,8 +76,8 @@ export default function HowItWorks() {
                 <div style={{ width: 2, height: 50, background: '#f1f1f1', marginTop: 10 }}></div>
               </div>
               <div>
-                <div className="fs-20 fw-600">Share your unique link</div>
-                <div className="fs-16 text-muted mt-1" style={{ maxWidth: 300 }}>Get your friends on board with a single tap.</div>
+                <div className="card-title">Share your unique link</div>
+                <div className="card-desc mt-1" style={{ maxWidth: 300 }}>Get your friends on board with a single tap.</div>
               </div>
             </div>
 
@@ -87,8 +87,8 @@ export default function HowItWorks() {
                 <div style={{ width: 2, height: 50, background: '#f1f1f1', marginTop: 10 }}></div>
               </div>
               <div>
-                <div className="fs-20 fw-600">Earn Points</div>
-                <div className="fs-16 text-muted mt-1" style={{ maxWidth: 300 }}>Rack up points for every verified sign-up.</div>
+                <div className="card-title">Earn Points</div>
+                <div className="card-desc mt-1" style={{ maxWidth: 300 }}>Rack up points for every verified sign-up.</div>
               </div>
             </div>
 
@@ -97,8 +97,8 @@ export default function HowItWorks() {
                 <div className="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40 }}>3</div>
               </div>
               <div>
-                <div className="fs-20 fw-600">Win Prizes</div>
-                <div className="fs-16 text-muted mt-1" style={{ maxWidth: 300 }}>Cash out or claim exclusive campus rewards.</div>
+                <div className="card-title">Win Prizes</div>
+                <div className="card-desc mt-1" style={{ maxWidth: 300 }}>Cash out or claim exclusive campus rewards.</div>
               </div>
             </div>
           </div>
@@ -111,9 +111,9 @@ export default function HowItWorks() {
              {/* Golden Ambient Glow */}
              <div className="position-absolute rounded-circle" style={{ width: 300, height: 300, top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'radial-gradient(circle, #FFD700 0%, transparent 70%)', filter: 'blur(50px)', zIndex: 0, opacity: 0.3 }}></div>
 
-             <div className="d-flex justify-content-between align-items-center mb-4 position-relative" style={{ zIndex: 1 }}>
-               <div className="fs-24 fw-600">Campus Top 10</div>
-               <div className="text-danger fw-bold fs-12 bg-light px-3 py-1 rounded-pill border">Ends in 2 days</div>
+              <div className="d-flex justify-content-between align-items-center mb-4 position-relative" style={{ zIndex: 1 }}>
+               <div className="card-title">Campus Top 10</div>
+               <div className="text-danger text-tiny bg-light px-3 py-1 rounded-pill border">Ends in 2 days</div>
              </div>
 
              <div className="d-flex flex-column gap-3 position-relative" style={{ zIndex: 1 }}>
@@ -135,10 +135,10 @@ export default function HowItWorks() {
                      <div className="me-3 d-flex justify-content-center" style={{ width: 30 }}>{Medal}</div>
                      <img src={user.img} alt={user.name} style={{ width: 45, height: 45, borderRadius: '50%', objectFit: 'cover' }} />
                      <div className="ms-3 flex-grow-1">
-                       <div className="fw-600 fs-16">{user.name}</div>
+                       <div className="text-body fw-600">{user.name}</div>
                      </div>
                      <div className="text-end position-relative">
-                       <div className={`fw-bold fs-16 ${user.isYou ? 'text-danger' : ''}`}>{user.points.toLocaleString()} pts</div>
+                       <div className={`text-body fw-bold ${user.isYou ? 'text-danger' : ''}`}>{user.points.toLocaleString()} pts</div>
                        {/* Animated points bump */}
                        <AnimatePresence>
                          {user.isYou && addedPoints && (

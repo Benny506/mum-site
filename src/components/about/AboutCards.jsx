@@ -24,8 +24,8 @@ export function FreshersCard() {
   return (
     <motion.div ref={ref} style={{ y }} className="about-card freshers-card overflow-hidden position-relative">
       <div className="p-4 p-md-5 position-relative z-2">
-        <h3 className="text-white fw-bold fs-1 mb-3">For Freshers</h3>
-        <p className="text-white opacity-75 fs-5 pe-lg-4">
+        <h3 className="text-white card-title mb-3">For Freshers</h3>
+        <p className="text-white opacity-75 card-desc pe-lg-4">
           You don’t even know where the restroom is — a simple problem that makes campus life harder than it should be.
         </p>
       </div>
@@ -82,8 +82,8 @@ export function ReturningCard() {
 
       <div className="row h-100 position-relative z-2 align-items-center">
         <div className="col-12 col-md-7 p-4 p-md-5">
-          <h3 className="text-white fw-bold fs-1 mb-3">For Returning Students</h3>
-          <p className="text-white opacity-75 fs-5">
+          <h3 className="text-white card-title mb-3">For Returning Students</h3>
+          <p className="text-white opacity-75 card-desc">
             You only know your daily route — office, lecture hall, cafeteria, repeat — and the rest of campus stays invisible.
           </p>
         </div>
@@ -132,8 +132,8 @@ export function VisitorsCard() {
       </svg>
 
       <div className="position-relative z-2 p-4 p-md-5 text-center" style={{ maxWidth: '800px' }}>
-        <h3 className="fw-bold fs-1 mb-4 text-dark">For Visitors & First timers</h3>
-        <p className="fs-4 text-dark opacity-75">
+        <h3 className="card-title mb-4 text-dark">For Visitors & First timers</h3>
+        <p className="card-desc text-dark opacity-75">
           Whether it’s your first day or a quick drop-in, skip the awkward wandering and find your way like a student who’s been here all semester.
         </p>
       </div>

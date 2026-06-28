@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Collapse from "react-bootstrap/Collapse";
 import CustomSvg from "../customSvg/CustomSvg";
 import "./faq.css";
 
@@ -26,24 +27,18 @@ function Faq() {
         style={{ cursor: "pointer", padding: "18px 24px", borderRadius: "10px", overflow: "hidden", border: "1px solid #f8f8f8" }}
       >
         <div className="d-flex align-items-center justify-content-between">
-          <div className="fs-19 fw-500 text-dark">{question}</div>
+          <div className="card-title text-dark">{question}</div>
           <div style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}>
             <CustomSvg name={isOpen ? "minus" : "plus"} />
           </div>
         </div>
-        <div
-          style={{
-            maxHeight: isOpen ? "200px" : "0px",
-            opacity: isOpen ? 1 : 0,
-            overflow: "hidden",
-            transition: "max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out",
-            marginTop: isOpen ? "15px" : "0px"
-          }}
-        >
-          <div className="fs-15 fw-400 opacity-75" style={{ paddingBottom: "5px" }}>
-            {answer}
+        <Collapse in={isOpen}>
+          <div>
+            <div className="card-desc opacity-75 mt-3" style={{ paddingBottom: "5px" }}>
+              {answer}
+            </div>
           </div>
-        </div>
+        </Collapse>
       </div>
     );
   };
@@ -65,8 +60,8 @@ function Faq() {
 
         {/* Floating FAQ Question Mark */}
         <div
-          className="position-absolute text-danger fw-bold opacity-25 d-none d-md-block"
-          style={{ fontSize: '150px', top: '-80px', right: '-120px', zIndex: 0, animation: 'floatFAQ 4s ease-in-out infinite', userSelect: 'none', lineHeight: 1 }}
+          className="position-absolute text-danger fw-bold opacity-25"
+          style={{ fontSize: '150px', top: '-80px', right: '-120px', zIndex: 0, animation: 'floatFAQ 4s ease-in-out infinite', userSelect: 'none', pointerEvents: 'none', lineHeight: 1 }}
         >
           ?
         </div>
@@ -81,9 +76,9 @@ function Faq() {
               marginRight: "15px",
             }}
           ></div>
-          <div className="fs-19 fw-600">FAQs</div>
+          <div className="section-subtitle">FAQs</div>
         </div>
-        <div className="fs-45 fw-600 mb-5 position-relative" style={{ zIndex: 1 }}>
+        <div className="section-title mb-5 position-relative" style={{ zIndex: 1 }}>
           Have Inquiries? Find Answers Here.
         </div>
       </div>

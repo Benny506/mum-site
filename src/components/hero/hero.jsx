@@ -44,7 +44,8 @@ function Hero() {
       {/* BLOCK 1: Text & Buttons (Natural spacing, entrance animation only) */}
       <div className="d-flex flex-column align-items-center text-center px-3 mb-5 pb-4">
         <motion.div
-          className="spacing-50 fs-63 fw-600 d-flex flex-wrap justify-content-center gap-2"
+          className="spacing-50 hero-title d-flex flex-wrap justify-content-center gap-2"
+          style={{ maxWidth: "800px" }}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -59,7 +60,8 @@ function Hero() {
         </motion.div>
 
         <motion.div
-          className="spacing-50-adjusted fw-400 fs-19 col-10 col-md-8 mt-4"
+          className="spacing-50-adjusted section-desc col-10 col-md-8 mt-4"
+          style={{ letterSpacing: "-1%" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
@@ -83,8 +85,8 @@ function Hero() {
               >
                 <img src={playStore} alt="Play Store" />
                 <div className="text-start">
-                  <div className="fs-11 fw-600">Available on</div>
-                  <div className="fs-19 fw-600">Google Play</div>
+                  <div className="text-tiny">Available on</div>
+                  <div className="card-title">Google Play</div>
                 </div>
               </motion.button>
             </a>
@@ -100,8 +102,8 @@ function Hero() {
               >
                 <img src={appleStore} alt="Apple Store" />
                 <div className="text-start">
-                  <div className="fs-11 fw-600">Available on</div>
-                  <div className="fs-19 fw-600">Apple Store</div>
+                  <div className="text-tiny">Available on</div>
+                  <div className="card-title">Apple Store</div>
                 </div>
               </motion.button>
             </a>
@@ -118,8 +120,8 @@ function Hero() {
           style={{ maxWidth: "284px", minWidth: "264px", borderRadius: "16px", y: leftCardY, zIndex: 10 }}
         >
           <div><img src={unCover} alt="Uncover" /></div>
-          <div className="fs-16 fw-500 mt-4 mb-3">Uncover Hidden Campus Spots</div>
-          <div className="fs-13 fw-400">
+          <div className="card-title mt-4 mb-3">Uncover Hidden Campus Spots</div>
+          <div className="card-desc">
             Restrooms, food joints, study nooks, and hangout corners — discover the places only students talk about.
           </div>
         </motion.div>
@@ -136,15 +138,15 @@ function Hero() {
         >
           <div className="text-start bg-ffb p-4 ms-5" style={{ maxWidth: "284px", minWidth: "248px", borderRadius: "16px" }}>
             <div><img src={navigate} alt="Navigate" /></div>
-            <div className="fs-16 fw-500 mt-4 mb-3">Navigate Shortcuts With Ease</div>
-            <div className="fs-13 fw-400">
+            <div className="card-title mt-4 mb-3">Navigate Shortcuts With Ease</div>
+            <div className="card-desc">
               Forget long detours and confusing hallways. Find the fastest paths to classes, hostels, or food spots.
             </div>
           </div>
           <div className="text-start bg-ffb p-4" style={{ maxWidth: "284px", minWidth: "250px", borderRadius: "16px" }}>
             <div><img src={connect} alt="Connect" /></div>
-            <div className="fs-16 fw-500 mt-4 mb-3">Connect Faster With Friends</div>
-            <div className="fs-13 fw-400">
+            <div className="card-title mt-4 mb-3">Connect Faster With Friends</div>
+            <div className="card-desc">
               From group projects to lunch breaks, see where your circle is and link up instantly.
             </div>
           </div>
