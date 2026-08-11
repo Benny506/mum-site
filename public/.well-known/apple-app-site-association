@@ -3,8 +3,13 @@
     "apps": [],
     "details": [
       {
-        "appID": "XXXXXXXXXX.com.controlgenesis.mum",
-        "paths": ["/download", "/download/*"]
+        "appID": "74478ZPN5Z.com.controlgenesis.mum",
+        "paths": [
+          "/download",
+          "/download/*",
+          "/single-location/*",
+          "/*"
+        ]
       }
     ]
   }

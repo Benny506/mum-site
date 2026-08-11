@@ -1,11 +1,13 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.controlgenesis.mum",
       "sha256_cert_fingerprints": [
-        "XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX:XX"
+        "E8:04:6D:0B:6B:D9:9D:7C:7A:83:DF:D1:F4:D1:31:8D:84:9D:EB:C3:80:29:5C:18:A3:8C:80:CD:B0:DC:F3:4D"
       ]
     }
   }
