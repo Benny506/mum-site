@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNIMAP - Redirecting...</title>
+    <script>
+      (function() {
+        var pathname = window.location.pathname;
+        var cleanPath = pathname.replace(/\/+$/, "");
+        var search = window.location.search || "";
+        if (cleanPath === "/download") {
+          window.location.replace("/#/download" + search);
+        } else if (cleanPath && cleanPath !== "") {
+          window.location.replace("/#" + cleanPath + search);
+        } else {
+          window.location.replace("/#/" + search);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <p style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+      Redirecting to <a href="/#/download">UNIMAP Download</a>...
+    </p>
+  </body>
+</html>

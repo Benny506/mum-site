@@ -33,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/download" element={<Home />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </HashRouter>
     </div>

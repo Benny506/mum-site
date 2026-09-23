@@ -20,8 +20,17 @@ function Home() {
   const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   useEffect(() => {
-    if (window.location.href.includes("/download") || location.pathname.includes("/download")) {
+    const isDownload =
+      window.location.href.includes("/download") ||
+      location.pathname.includes("/download") ||
+      window.location.pathname.includes("/download") ||
+      window.location.hash.includes("/download");
+
+    if (isDownload) {
       setShowDownloadModal(true);
+      if (!window.location.hash.includes("/download")) {
+        window.location.hash = "/download";
+      }
     } else {
       setShowDownloadModal(false);
     }
@@ -30,6 +39,9 @@ function Home() {
   const handleCloseModal = () => {
     setShowDownloadModal(false);
     navigate("/");
+    if (window.location.pathname.includes("/download")) {
+      window.history.replaceState(null, "", "/#/");
+    }
   };
   const refHowItWork = useRef(null);
   const refFeatures = useRef(null);
