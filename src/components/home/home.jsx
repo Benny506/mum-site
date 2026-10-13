@@ -20,28 +20,17 @@ function Home() {
   const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   useEffect(() => {
-    const isDownload =
-      window.location.href.includes("/download") ||
-      location.pathname.includes("/download") ||
-      window.location.pathname.includes("/download") ||
-      window.location.hash.includes("/download");
-
+    const isDownload = location.pathname === "/download";
     if (isDownload) {
       setShowDownloadModal(true);
-      if (!window.location.hash.includes("/download")) {
-        window.location.hash = "/download";
-      }
     } else {
       setShowDownloadModal(false);
     }
-  }, [location]);
+  }, [location.pathname]);
 
   const handleCloseModal = () => {
     setShowDownloadModal(false);
     navigate("/");
-    if (window.location.pathname.includes("/download")) {
-      window.history.replaceState(null, "", "/#/");
-    }
   };
   const refHowItWork = useRef(null);
   const refFeatures = useRef(null);

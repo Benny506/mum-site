@@ -22,14 +22,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UNIMAP</title>
     <script>
+      // Legacy hash-link compat: printed QR codes may encode /#/download,
+      // /#/single-location/:id, /#/business-profile/:id, or /#/signup.
+      // Rewrite to the equivalent BrowserRouter path before the app boots.
       (function() {
-        var pathname = window.location.pathname;
-        var cleanPath = pathname.replace(/\/+$/, "");
-        var search = window.location.search || "";
-        if (cleanPath === "/download") {
-          window.location.replace("/#/download" + search);
-        } else if (cleanPath && cleanPath !== "" && (!window.location.hash || window.location.hash === "" || window.location.hash === "#/")) {
-          window.location.replace("/#" + cleanPath + search);
+        var hash = window.location.hash || "";
+        if (hash.indexOf("#/") === 0) {
+          var parts = hash.slice(1).split("?");
+          var hashPath = parts[0];
+          var hashQuery = parts[1] ? "?" + parts[1] : window.location.search || "";
+          var known =
+            hashPath === "/download" ||
+            hashPath.indexOf("/single-location/") === 0 ||
+            hashPath.indexOf("/business-profile/") === 0 ||
+            hashPath.indexOf("/signup") === 0;
+          if (known) {
+            window.location.replace(hashPath + hashQuery);
+          }
         }
       })();
     </script>

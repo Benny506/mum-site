@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { APPLE_STORE_LINK, GOOGLE_PLAY_LINK } from "../../constants/links";
 
 function Download() {
   useEffect(() => {
@@ -6,13 +7,13 @@ function Download() {
 
     // Detect iOS
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      window.location.href = "https://apps.apple.com/app/idYOUR_APPLE_APP_ID";
+      window.location.href = APPLE_STORE_LINK;
       return;
     }
 
     // Detect Android
     if (/android/i.test(userAgent)) {
-      window.location.href = "https://play.google.com/store/apps/details?id=com.controlgenesis.mum";
+      window.location.href = GOOGLE_PLAY_LINK;
       return;
     }
 
@@ -25,10 +26,10 @@ function Download() {
       <p>Scan the QR code or visit this page on your mobile device to download the app.</p>
       
       <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
-        <a href="https://apps.apple.com/app/idYOUR_APPLE_APP_ID" target="_blank" rel="noreferrer" style={{ padding: '15px 30px', backgroundColor: 'black', color: 'white', textDecoration: 'none', borderRadius: '10px', fontWeight: 'bold' }}>
+        <a href={APPLE_STORE_LINK} target="_blank" rel="noreferrer" style={{ padding: '15px 30px', backgroundColor: 'black', color: 'white', textDecoration: 'none', borderRadius: '10px', fontWeight: 'bold' }}>
           Download on iOS
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.controlgenesis.mum" target="_blank" rel="noreferrer" style={{ padding: '15px 30px', backgroundColor: 'black', color: 'white', textDecoration: 'none', borderRadius: '10px', fontWeight: 'bold' }}>
+        <a href={GOOGLE_PLAY_LINK} target="_blank" rel="noreferrer" style={{ padding: '15px 30px', backgroundColor: 'black', color: 'white', textDecoration: 'none', borderRadius: '10px', fontWeight: 'bold' }}>
           Download on Android
         </a>
       </div>

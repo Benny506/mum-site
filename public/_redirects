@@ -1,1 +1,9 @@
+# Netlify SPA rewrites: every route serves the app shell with HTTP 200 so
+# deep links (/single-location/*, /business-profile/*, /signup, /download)
+# cold-load directly. Human traffic always gets the SPA; the Phase 2 edge
+# function only rewrites OG tags for crawler user-agents.
+/single-location/*    /index.html   200
+/business-profile/*   /index.html   200
+/signup               /index.html   200
+/download             /index.html   200
 /*    /index.html   200

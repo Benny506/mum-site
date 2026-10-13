@@ -1,0 +1,17 @@
+# Netlify: publish the Vite SPA. Deep paths are rewritten to the shell
+# in public/_redirects; the edge function only enriches crawler HTML.
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[edge_functions]]
+  function = "og-injector"
+  path = "/single-location/*"
+
+[[edge_functions]]
+  function = "og-injector"
+  path = "/business-profile/*"
+
+[[edge_functions]]
+  function = "og-injector"
+  path = "/signup"

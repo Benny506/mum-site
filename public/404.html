@@ -5,23 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UNIMAP - Redirecting...</title>
     <script>
+      // Static-host fallback: preserve the deep path and hand it to the SPA.
+      // The app boots on /index.html content with the original path intact,
+      // and the in-app hash-shim additionally recovers legacy #/ URLs.
       (function() {
-        var pathname = window.location.pathname;
-        var cleanPath = pathname.replace(/\/+$/, "");
+        var path = window.location.pathname || "/";
         var search = window.location.search || "";
-        if (cleanPath === "/download") {
-          window.location.replace("/#/download" + search);
-        } else if (cleanPath && cleanPath !== "") {
-          window.location.replace("/#" + cleanPath + search);
+        var hash = window.location.hash || "";
+        if (hash.indexOf("#/") === 0) {
+          var parts = hash.slice(1).split("?");
+          var hashPath = parts[0];
+          var hashQuery = parts[1] ? "?" + parts[1] : search;
+          window.location.replace(hashPath + hashQuery);
+        } else if (path !== "/index.html") {
+          window.location.replace(path + search);
         } else {
-          window.location.replace("/#/" + search);
+          window.location.replace("/" + search);
         }
       })();
     </script>
   </head>
   <body>
     <p style="font-family: sans-serif; text-align: center; margin-top: 50px;">
-      Redirecting to <a href="/#/download">UNIMAP Download</a>...
+      Redirecting to <a href="/">UNIMAP</a>...
     </p>
   </body>
 </html>
