@@ -2,6 +2,9 @@
 # deep links (/single-location/*, /business-profile/*, /signup, /download)
 # cold-load directly. Human traffic always gets the SPA; the Phase 2 edge
 # function only rewrites OG tags for crawler user-agents.
+# Static verification files must bypass the SPA fallback.
+# Netlify serves existing dist files first, but be explicit for crawlers.
+/app-ads.txt          /app-ads.txt    200
 /single-location/*    /index.html   200
 /business-profile/*   /index.html   200
 /signup               /index.html   200
