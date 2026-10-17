@@ -14,7 +14,6 @@ const PREMIUM_UNLOCKS = [
   "Unlimited ping sends",
   "Full history, reviews & key insights",
   "Unlimited schedules with every repeat",
-  "Full business profile tools",
   "No ads",
 ];
 
