@@ -8,5 +8,6 @@
 /single-location/*    /index.html   200
 /business-profile/*   /index.html   200
 /signup               /index.html   200
+/subscription         /index.html   200
 /download             /index.html   200
 /*    /index.html   200

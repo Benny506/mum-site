@@ -58,6 +58,21 @@
   line-height: 1.5;
 }
 
+.mum-preview-section {
+  font-size: 16px;
+  font-weight: 800;
+  color: #141416;
+  margin: 16px 0 8px;
+}
+
+.mum-preview-list {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
 .mum-preview-rating {
   display: flex;
   align-items: center;

@@ -4,6 +4,7 @@ import Navigation from "../components/navigation/navigation";
 import LocationPreview from "./LocationPreview";
 import BusinessPreview from "./BusinessPreview";
 import ReferralPreview from "./ReferralPreview";
+import SubscriptionPreview from "./SubscriptionPreview";
 import UnavailablePreview from "./UnavailablePreview";
 import { fetchLocationPreview, fetchBusinessPreview, locationCoverUrl, businessCoverUrl } from "./previewData";
 import { trackPreviewView, trackUnavailableView } from "./previewAnalytics";
@@ -62,6 +63,16 @@ export default function DeepLinkGate({ type }) {
       return undefined;
     }
 
+    if (type === "subscription") {
+      trackPreviewView({ route, entityType: "subscription", status: "ok" });
+      setMeta(
+        "MyUniMap Premium — keep core features free",
+        "Premium unlocks more Owl, unlimited pings, full history and more, while keeping MyUniMap's core navigation free for everyone."
+      );
+      setState({ status: "ok" });
+      return undefined;
+    }
+
     const run = async () => {
       const res =
         type === "location"
@@ -112,6 +123,9 @@ export default function DeepLinkGate({ type }) {
         )}
         {state.status === "ok" && type === "referral" && (
           <ReferralPreview refCode={state.refCode} route={route} />
+        )}
+        {state.status === "ok" && type === "subscription" && (
+          <SubscriptionPreview route={route} />
         )}
         {state.status === "unavailable" && (
           <UnavailablePreview

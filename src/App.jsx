@@ -72,6 +72,7 @@ function App() {
             element={<DeepLinkGate type="business" />}
           />
           <Route path="/signup" element={<DeepLinkGate type="referral" />} />
+          <Route path="/subscription" element={<DeepLinkGate type="subscription" />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>

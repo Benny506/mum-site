@@ -15,3 +15,7 @@
 [[edge_functions]]
   function = "og-injector"
   path = "/signup"
+
+[[edge_functions]]
+  function = "og-injector"
+  path = "/subscription"
