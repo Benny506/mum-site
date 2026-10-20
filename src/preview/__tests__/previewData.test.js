@@ -6,7 +6,7 @@ vi.mock("../supabaseClient", () => ({
 }));
 
 import supabase from "../supabaseClient";
-import { fetchLocationPreview, fetchBusinessPreview } from "../previewData";
+import { fetchLocationPreview, fetchBusinessPreview, fetchAnnouncementPreview, announcementBannerUrl } from "../previewData";
 
 const chain = (resolved) => {
   const single = vi.fn().mockResolvedValue(resolved);
@@ -83,5 +83,43 @@ describe("fetchBusinessPreview", () => {
     supabase.from = vi.fn().mockReturnValue(c);
     const res = await fetchBusinessPreview("gone");
     expect(res.status).toBe("unavailable");
+  });
+});
+
+describe("fetchAnnouncementPreview", () => {
+  it("returns ok on announcement hit", async () => {
+    const c = chain({ data: { id: "a1", title: "Fees", images: [{ url: "https://x/y.jpg", kind: "image" }] }, error: null });
+    supabase.from = vi.fn().mockReturnValue(c);
+    const res = await fetchAnnouncementPreview("a1");
+    expect(supabase.from).toHaveBeenCalledWith("announcements");
+    expect(c.eq).toHaveBeenCalledWith("id", "a1");
+    expect(res.status).toBe("ok");
+  });
+
+  it("maps missing row (PGRST116) to unavailable", async () => {
+    const c = chain({ data: null, error: { code: "PGRST116" } });
+    supabase.from = vi.fn().mockReturnValue(c);
+    const res = await fetchAnnouncementPreview("gone");
+    expect(res.status).toBe("unavailable");
+    expect(res.reason).toBe("not-found");
+  });
+
+  it("maps empty id to unavailable without fetching", async () => {
+    const res = await fetchAnnouncementPreview("");
+    expect(res.status).toBe("unavailable");
+  });
+});
+
+describe("announcementBannerUrl", () => {
+  it("picks the first image-kind attachment", () => {
+    expect(
+      announcementBannerUrl({ images: [{ url: "https://x/doc.pdf", kind: "pdf" }, { url: "https://x/y.jpg", kind: "image" }] })
+    ).toBe("https://x/y.jpg");
+  });
+
+  it("supports legacy string attachments and empty input", () => {
+    expect(announcementBannerUrl({ images: ["https://x/y.jpg"] })).toBe("https://x/y.jpg");
+    expect(announcementBannerUrl({ images: [] })).toBeNull();
+    expect(announcementBannerUrl(null)).toBeNull();
   });
 });

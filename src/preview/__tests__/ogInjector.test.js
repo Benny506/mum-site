@@ -34,6 +34,42 @@ describe("og-injector crawler gate", () => {
     expect(res.headers.get("cache-control")).toContain("max-age=3600");
   });
 
+  it("injects announcement tags with banner image on hit", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [
+        { id: "a1", title: "Fee Update", body: "Shuttle fees changed", images: [{ url: "https://x/y.jpg", kind: "image" }] },
+      ],
+    });
+    const context = {
+      next: vi.fn().mockResolvedValue(new Response("<html><head></head><body></body></html>")),
+    };
+    const req = new Request("https://my-uni-map.com/announcement/a1", {
+      headers: { "user-agent": "Slackbot/1.0" },
+    });
+    const res = await handler(req, context);
+    expect(global.fetch).toHaveBeenCalledWith(expect.stringContaining("/rest/v1/announcements"), expect.anything());
+    const html = await res.text();
+    expect(html).toContain("Fee Update on UniMap");
+    expect(html).toContain("https://x/y.jpg");
+  });
+
+  it("falls back to brand image when announcement has no photo", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => [{ id: "a2", title: "Notice", body: "Hello", images: [] }],
+    });
+    const context = {
+      next: vi.fn().mockResolvedValue(new Response("<html><head></head><body></body></html>")),
+    };
+    const req = new Request("https://my-uni-map.com/announcement/a2", {
+      headers: { "user-agent": "WhatsApp/2.24" },
+    });
+    const res = await handler(req, context);
+    const html = await res.text();
+    expect(html).toContain("og-brand.png");
+  });
+
   it("injects entity tags on hit", async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,

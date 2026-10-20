@@ -3,10 +3,11 @@ import { useParams, useSearchParams, useLocation } from "react-router-dom";
 import Navigation from "../components/navigation/navigation";
 import LocationPreview from "./LocationPreview";
 import BusinessPreview from "./BusinessPreview";
+import AnnouncementPreview from "./AnnouncementPreview";
 import ReferralPreview from "./ReferralPreview";
 import SubscriptionPreview from "./SubscriptionPreview";
 import UnavailablePreview from "./UnavailablePreview";
-import { fetchLocationPreview, fetchBusinessPreview, locationCoverUrl, businessCoverUrl } from "./previewData";
+import { fetchLocationPreview, fetchBusinessPreview, fetchAnnouncementPreview, locationCoverUrl, businessCoverUrl, announcementBannerUrl } from "./previewData";
 import { trackPreviewView, trackUnavailableView } from "./previewAnalytics";
 import "./preview.css";
 
@@ -45,7 +46,9 @@ export default function DeepLinkGate({ type }) {
       ? params.location_id
       : type === "business"
         ? params.business_id
-        : null;
+        : type === "announcement"
+          ? params.announcement_id
+          : null;
   const refCode = type === "referral" ? searchParams.get("ref") : null;
 
   useEffect(() => {
@@ -77,18 +80,25 @@ export default function DeepLinkGate({ type }) {
       const res =
         type === "location"
           ? await fetchLocationPreview(id)
-          : await fetchBusinessPreview(id);
+          : type === "business"
+            ? await fetchBusinessPreview(id)
+            : await fetchAnnouncementPreview(id);
       if (cancelled) return;
-      const entityType = type === "location" ? "location" : "business";
+      const entityType = type === "location" ? "location" : type === "business" ? "business" : "announcement";
       if (res.status === "ok") {
         trackPreviewView({ route, entityType, status: "ok" });
         const title =
-          type === "location" ? res.data.title : res.data.name;
+          type === "location" ? res.data.title : type === "business" ? res.data.name : res.data.title;
         const image =
           type === "location"
             ? locationCoverUrl(res.data)
-            : businessCoverUrl(res.data);
-        setMeta(`${title} on UniMap`, res.data.description || BRAND_DESC, image);
+            : type === "business"
+              ? businessCoverUrl(res.data)
+              : announcementBannerUrl(res.data);
+        const excerpt = type === "announcement" && res.data.body
+          ? String(res.data.body).slice(0, 200)
+          : res.data.description;
+        setMeta(`${title} on UniMap`, excerpt || BRAND_DESC, image);
       } else {
         trackPreviewView({ route, entityType, status: res.status });
         trackUnavailableView({ route, entityType, reason: res.reason });
@@ -127,9 +137,12 @@ export default function DeepLinkGate({ type }) {
         {state.status === "ok" && type === "subscription" && (
           <SubscriptionPreview route={route} />
         )}
+        {state.status === "ok" && type === "announcement" && (
+          <AnnouncementPreview announcement={state.data} route={route} />
+        )}
         {state.status === "unavailable" && (
           <UnavailablePreview
-            kind={type === "business" ? "business" : type === "referral" ? "referral" : "location"}
+            kind={type === "business" ? "business" : type === "referral" ? "referral" : type === "announcement" ? "announcement" : "location"}
             route={route}
             entityType={type}
             onRetry={undefined}

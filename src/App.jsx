@@ -22,6 +22,7 @@ function HashShim() {
       target === "/download" ||
       target.startsWith("/single-location/") ||
       target.startsWith("/business-profile/") ||
+      target.startsWith("/announcement/") ||
       target.startsWith("/signup");
     if (known) {
       navigate(
@@ -70,6 +71,10 @@ function App() {
           <Route
             path="/business-profile/:business_id"
             element={<DeepLinkGate type="business" />}
+          />
+          <Route
+            path="/announcement/:announcement_id"
+            element={<DeepLinkGate type="announcement" />}
           />
           <Route path="/signup" element={<DeepLinkGate type="referral" />} />
           <Route path="/subscription" element={<DeepLinkGate type="subscription" />} />

@@ -19,6 +19,18 @@ export const businessCoverUrl = (profile) =>
 export const businessLogoUrl = (profile) =>
   publicImageUrl(profile?.logo_url, "business_assets");
 
+export const announcementBannerUrl = (announcement) => {
+  const imgs = announcement?.images;
+  if (!Array.isArray(imgs)) return null;
+  const first = imgs
+    .map((a) => (typeof a === "string" ? { url: a, kind: "image" } : a))
+    .find((a) => a?.url && (a.kind || "image") === "image");
+  return first?.url || null;
+};
+
+const ANNOUNCEMENT_FIELDS =
+  "id,title,body,images,tags,starts_at,ends_at,created_at";
+
 const LOCATION_FIELDS =
   "id,title,category,description,location_images,avg_rating,total_good,total_bad,total_in_between";
 
@@ -77,6 +89,25 @@ export async function fetchBusinessPreview(ownerId) {
         top_catalogs: (catalogs ?? []).map((c) => c.name).filter(Boolean),
       },
     };
+  } catch (e) {
+    return { status: "error", reason: "network", message: e?.message || "Network error" };
+  }
+}
+
+export async function fetchAnnouncementPreview(announcementId) {
+  if (!announcementId) return { status: "unavailable", reason: "not-found" };
+  try {
+    const { data, error } = await supabase
+      .from("announcements")
+      .select(ANNOUNCEMENT_FIELDS)
+      .eq("id", announcementId)
+      .single();
+    if (error) {
+      if (isMissingRow(error)) return { status: "unavailable", reason: "not-found" };
+      return { status: "error", reason: "fetch-failed", message: error.message };
+    }
+    if (!data) return { status: "unavailable", reason: "not-found" };
+    return { status: "ok", data };
   } catch (e) {
     return { status: "error", reason: "network", message: e?.message || "Network error" };
   }

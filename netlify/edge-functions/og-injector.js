@@ -80,6 +80,28 @@ async function resolveEntity(pathname) {
   }
 
   if (pathname === "/signup" || pathname.startsWith("/signup")) return { ...BRAND };
+
+  const ann = pathname.match(/^\/announcement\/([^/?#]+)/);
+  if (ann) {
+    const { data } = await withTimeout(
+      fetch(
+        `${SUPABASE_URL}/rest/v1/announcements?id=eq.${encodeURIComponent(ann[1])}&select=id,title,body,images`,
+        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
+      ).then((r) => (r.ok ? r.json().then((rows) => ({ data: rows[0] })) : { data: null })),
+      2500
+    );
+    if (!data) return null;
+    const imgs = Array.isArray(data.images) ? data.images : [];
+    const banner = imgs
+      .map((a) => (typeof a === "string" ? { url: a, kind: "image" } : a))
+      .find((a) => a?.url && (a.kind || "image") === "image");
+    const bannerUrl = banner?.url && /^https?:\/\//i.test(banner.url) ? banner.url : null;
+    return {
+      title: `${data.title || "Campus announcement"} on UniMap`,
+      description: (data.body || BRAND.description).slice(0, 200),
+      image: bannerUrl || BRAND.image,
+    };
+  }
   return null;
 }
 
@@ -126,5 +148,5 @@ export default async function handler(request, context) {
 }
 
 export const config = {
-  path: ["/single-location/*", "/business-profile/*", "/signup"],
+  path: ["/single-location/*", "/business-profile/*", "/announcement/*", "/signup"],
 };

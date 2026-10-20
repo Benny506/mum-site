@@ -18,6 +18,11 @@ const COPY = {
     title: "This invite link is incomplete",
     sub: "No referral code was included. You can still get the app and join campus life.",
   },
+  announcement: {
+    eyebrow: "Shared announcement",
+    title: "This announcement is no longer available",
+    sub: "The shared announcement may have been removed. Get the app to see the latest campus news.",
+  },
   network: {
     eyebrow: "Connection issue",
     title: "Preview could not load",
