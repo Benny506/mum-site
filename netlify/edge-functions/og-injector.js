@@ -148,6 +148,14 @@ async function resolveEntity(pathname, searchParams) {
 }
 
 export function injectOg(html, canonical, tags) {
+  // Strip the static shell's brand OG tags first: scrapers (WhatsApp)
+  // read the FIRST og:title/og:image they see, so appending would leave
+  // every share showing the generic brand card.
+  const stripped = String(html)
+    .replace(/<meta[^>]+property=["']og:(title|description|image|url)["'][^>]*>\s*/gi, "")
+    .replace(/<meta[^>]+name=["']twitter:card["'][^>]*>\s*/gi, "")
+    .replace(/<meta[^>]+name=["']twitter:(title|description|image)["'][^>]*>\s*/gi, "")
+    .replace(/<link[^>]+rel=["']canonical["'][^>]*>\s*/gi, "");
   const og = [
     `<meta property="og:title" content="${escapeHtml(tags.title)}" />`,
     `<meta property="og:description" content="${escapeHtml(tags.description)}" />`,
@@ -156,8 +164,8 @@ export function injectOg(html, canonical, tags) {
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<link rel="canonical" href="${escapeHtml(canonical)}" />`,
   ].join("\n    ");
-  if (/<\/head>/i.test(html)) return html.replace(/<\/head>/i, `    ${og}\n  </head>`);
-  return `${og}\n${html}`;
+  if (/<\/head>/i.test(stripped)) return stripped.replace(/<\/head>/i, `    ${og}\n  </head>`);
+  return `${og}\n${stripped}`;
 }
 
 export default async function handler(request, context) {

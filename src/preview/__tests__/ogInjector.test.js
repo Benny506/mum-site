@@ -110,4 +110,23 @@ describe("og-injector crawler gate", () => {
     expect(out).toContain("&quot;quoted&quot;");
     expect(out).toContain('rel="canonical"');
   });
+
+  it("replaces static brand tags instead of duplicating", () => {
+    const shell =
+      '<html><head><meta property="og:title" content="UNIMAP brand" />' +
+      '<meta property="og:description" content="brand desc" />' +
+      '<meta property="og:image" content="https://my-uni-map.com/og-brand.png" />' +
+      '<meta property="og:site_name" content="MyUniMap" />' +
+      '<meta name="twitter:card" content="summary_large_image" />' +
+      '<title>UNIMAP</title></head><body></body></html>';
+    const out = injectOg(shell, "https://my-uni-map.com/subscription", {
+      title: "MyUniMap Premium",
+      description: "Desc",
+      image: "https://x/img.png",
+    });
+    expect(out.match(/og:title/g)).toHaveLength(1);
+    expect(out).toContain("MyUniMap Premium");
+    expect(out).not.toContain("UNIMAP brand");
+    expect(out).toContain("og:site_name");
+  });
 });
