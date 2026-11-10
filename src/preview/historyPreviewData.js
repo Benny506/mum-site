@@ -1,14 +1,13 @@
-// Campus-history preview lookup. The story dataset is an app-local seed
-// (JSON + bundled images), so the web preview resolves stories from a
-// lazily-imported copy of the seed JSON instead of Supabase. Photos are not
-// available to the web build, so history previews render text-only.
+// Campus-history preview lookup. The story dataset is mirrored from the
+// app seed (see app/MUM/.../campusHistory/data/unicalHistory.json) into
+// src/preview/data/unicalHistory.json so the standalone web repo builds
+// self-contained. Photos are not available to the web build, so history
+// previews render text-only.
 let momentsCache = null;
 
 async function loadMoments() {
   if (!momentsCache) {
-    const mod = await import(
-      '../../../app/MUM/components/main/screens/campusHistory/data/unicalHistory.json'
-    );
+    const mod = await import('./data/unicalHistory.json');
     const doc = mod.default || mod;
     momentsCache = Array.isArray(doc?.moments) ? doc.moments : [];
   }
