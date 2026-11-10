@@ -8,6 +8,15 @@
           "/download",
           "/download/*",
           "/single-location/*",
+          "/business-profile/*",
+          "/announcement/*",
+          "/campus-history/*",
+          "/signup",
+          "/signup/*",
+          "/subscription",
+          "/subscription/*",
+          "/tutorials",
+          "/tutorials/*",
           "/*"
         ]
       }

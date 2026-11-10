@@ -1,25 +1,7 @@
 # Netlify: publish the Vite SPA. Deep paths are rewritten to the shell
 # in public/_redirects; the edge function only enriches crawler HTML.
+# Edge routing lives in netlify/edge-functions/og-injector.js `config`
+# (single source) — do not duplicate [[edge_functions]] bindings here.
 [build]
   publish = "dist"
   command = "npm run build"
-
-[[edge_functions]]
-  function = "og-injector"
-  path = "/single-location/*"
-
-[[edge_functions]]
-  function = "og-injector"
-  path = "/business-profile/*"
-
-[[edge_functions]]
-  function = "og-injector"
-  path = "/announcement/*"
-
-[[edge_functions]]
-  function = "og-injector"
-  path = "/signup"
-
-[[edge_functions]]
-  function = "og-injector"
-  path = "/subscription"

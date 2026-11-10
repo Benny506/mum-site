@@ -44,6 +44,10 @@
             hashPath === "/download" ||
             hashPath.indexOf("/single-location/") === 0 ||
             hashPath.indexOf("/business-profile/") === 0 ||
+            hashPath.indexOf("/announcement/") === 0 ||
+            hashPath.indexOf("/campus-history/") === 0 ||
+            hashPath.indexOf("/tutorials") === 0 ||
+            hashPath === "/subscription" ||
             hashPath.indexOf("/signup") === 0;
           if (known) {
             window.location.replace(hashPath + hashQuery);

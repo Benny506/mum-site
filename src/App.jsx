@@ -23,6 +23,10 @@ function HashShim() {
       target.startsWith("/single-location/") ||
       target.startsWith("/business-profile/") ||
       target.startsWith("/announcement/") ||
+      target.startsWith("/campus-history/") ||
+      target.startsWith("/tutorials") ||
+      target === "/subscription" ||
+      target.startsWith("/subscription?") ||
       target.startsWith("/signup");
     if (known) {
       navigate(
@@ -76,8 +80,17 @@ function App() {
             path="/announcement/:announcement_id"
             element={<DeepLinkGate type="announcement" />}
           />
+          <Route
+            path="/campus-history/:moment_id"
+            element={<DeepLinkGate type="history" />}
+          />
           <Route path="/signup" element={<DeepLinkGate type="referral" />} />
           <Route path="/subscription" element={<DeepLinkGate type="subscription" />} />
+          <Route path="/tutorials" element={<DeepLinkGate type="tutorial-list" />} />
+          <Route
+            path="/tutorials/:session_key"
+            element={<DeepLinkGate type="tutorial" />}
+          />
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>

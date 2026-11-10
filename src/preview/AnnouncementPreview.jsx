@@ -57,7 +57,7 @@ export default function AnnouncementPreview({ announcement, route }) {
         )}
         {announcement?.body && <p className="mum-preview-sub">{excerpt(announcement.body)}</p>}
         <p className="mum-preview-sub">Open this announcement in the UniMap app to see photos, places, and actions.</p>
-        <PreviewCTAs deepUrl={deepUrl} route={route} entityType="announcement" />
+        <PreviewCTAs deepUrl={deepUrl} entityUrl={deepUrl} route={route} entityType="announcement" />
       </div>
     </div>
   );

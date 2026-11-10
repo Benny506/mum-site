@@ -12,13 +12,14 @@ function detectDesktop() {
   return !/iPad|iPhone|iPod|android/i.test(ua);
 }
 
-export default function PreviewCTAs({ deepUrl, route, entityType, compact = false }) {
+export default function PreviewCTAs({ deepUrl, entityUrl, route, entityType, compact = false }) {
   const [copied, setCopied] = useState(false);
   const isDesktop = detectDesktop();
+  const shareUrl = entityUrl || deepUrl || APP_DOWNLOAD_URL;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(APP_DOWNLOAD_URL);
+      await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -59,14 +60,14 @@ export default function PreviewCTAs({ deepUrl, route, entityType, compact = fals
         <div className="mum-preview-qr">
           <img
             src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-              APP_DOWNLOAD_URL
+              shareUrl
             )}`}
-            alt="QR code to download MyUniMap"
+            alt="QR code to open this shared page"
             loading="lazy"
           />
           <div>
             <p className="mum-preview-sub" style={{ marginBottom: 8 }}>
-              Scan with your phone camera to get the app.
+              Scan with your phone camera to open this page.
             </p>
             <button
               type="button"
@@ -74,7 +75,7 @@ export default function PreviewCTAs({ deepUrl, route, entityType, compact = fals
               style={{ padding: "10px 14px", fontSize: 14 }}
               onClick={handleCopy}
             >
-              {copied ? "Copied!" : "Copy download link"}
+              {copied ? "Copied!" : "Copy link"}
             </button>
           </div>
         </div>

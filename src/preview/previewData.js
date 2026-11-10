@@ -25,8 +25,13 @@ export const announcementBannerUrl = (announcement) => {
   const first = imgs
     .map((a) => (typeof a === "string" ? { url: a, kind: "image" } : a))
     .find((a) => a?.url && (a.kind || "image") === "image");
-  return first?.url || null;
+  if (!first?.url) return null;
+  if (/^https?:\/\//i.test(first.url)) return first.url;
+  return publicImageUrl(first.url, "announcement-media");
 };
+
+export const businessOgImageUrl = (profile) =>
+  businessCoverUrl(profile) || businessLogoUrl(profile) || null;
 
 const ANNOUNCEMENT_FIELDS =
   "id,title,body,images,tags,starts_at,ends_at,created_at";
@@ -108,6 +113,43 @@ export async function fetchAnnouncementPreview(announcementId) {
     }
     if (!data) return { status: "unavailable", reason: "not-found" };
     return { status: "ok", data };
+  } catch (e) {
+    return { status: "error", reason: "network", message: e?.message || "Network error" };
+  }
+}
+
+const TUTORIAL_FIELDS =
+  "id,session_key,title,category,mode,billing_type,full_price_ngn,discount_percent,is_active,sort_order";
+
+export async function fetchTutorialPreview(sessionKey) {
+  if (!sessionKey) return { status: "unavailable", reason: "not-found" };
+  try {
+    const { data, error } = await supabase
+      .from("tutorial_sessions")
+      .select(TUTORIAL_FIELDS)
+      .eq("session_key", sessionKey)
+      .single();
+    if (error) {
+      if (isMissingRow(error)) return { status: "unavailable", reason: "not-found" };
+      return { status: "error", reason: "fetch-failed", message: error.message };
+    }
+    if (!data || data.is_active === false) return { status: "unavailable", reason: "not-found" };
+    return { status: "ok", data };
+  } catch (e) {
+    return { status: "error", reason: "network", message: e?.message || "Network error" };
+  }
+}
+
+export async function fetchTutorialListPreview() {
+  try {
+    const { data, error } = await supabase
+      .from("tutorial_sessions")
+      .select(TUTORIAL_FIELDS)
+      .eq("is_active", true)
+      .order("sort_order", { ascending: true })
+      .limit(6);
+    if (error) return { status: "error", reason: "fetch-failed", message: error.message };
+    return { status: "ok", data: data || [] };
   } catch (e) {
     return { status: "error", reason: "network", message: e?.message || "Network error" };
   }

@@ -43,7 +43,7 @@ async function withTimeout(promise, ms) {
   }
 }
 
-async function resolveEntity(pathname) {
+async function resolveEntity(pathname, searchParams) {
   const loc = pathname.match(/^\/single-location\/([^/?#]+)/);
   if (loc) {
     const { data } = await withTimeout(
@@ -79,7 +79,28 @@ async function resolveEntity(pathname) {
     };
   }
 
-  if (pathname === "/signup" || pathname.startsWith("/signup")) return { ...BRAND };
+  if (pathname === "/signup" || pathname.startsWith("/signup")) {
+    const ref = searchParams?.get("ref");
+    return ref ? { ...BRAND, title: `Join UniMap with @${ref}` } : { ...BRAND };
+  }
+
+  if (pathname === "/subscription") {
+    return {
+      ...BRAND,
+      title: "MyUniMap Premium — keep core features free",
+      description:
+        "Premium unlocks 200 Owl answers a month, unlimited pings, full history and more, while keeping MyUniMap's core navigation free for everyone.",
+    };
+  }
+
+  if (pathname === "/download" || pathname === "/") return { ...BRAND };
+
+  // Campus-history stories live in the app's local seed dataset, not in
+  // Supabase, so crawlers get brand tags; the client preview renders the
+  // full story from the bundled seed copy.
+  if (pathname.match(/^\/campus-history\/([^/?#]+)/)) {
+    return { ...BRAND, title: "UNICAL Campus History on UniMap" };
+  }
 
   const ann = pathname.match(/^\/announcement\/([^/?#]+)/);
   if (ann) {
@@ -95,12 +116,33 @@ async function resolveEntity(pathname) {
     const banner = imgs
       .map((a) => (typeof a === "string" ? { url: a, kind: "image" } : a))
       .find((a) => a?.url && (a.kind || "image") === "image");
-    const bannerUrl = banner?.url && /^https?:\/\//i.test(banner.url) ? banner.url : null;
+    const bannerUrl = banner?.url ? publicImage(banner.url, "announcement-media") : null;
     return {
       title: `${data.title || "Campus announcement"} on UniMap`,
       description: (data.body || BRAND.description).slice(0, 200),
       image: bannerUrl || BRAND.image,
     };
+  }
+
+  const tut = pathname.match(/^\/tutorials\/([^/?#]+)/);
+  if (tut) {
+    const { data } = await withTimeout(
+      fetch(
+        `${SUPABASE_URL}/rest/v1/tutorial_sessions?session_key=eq.${encodeURIComponent(tut[1])}&select=session_key,title,category,mode,full_price_ngn,discount_percent,is_active`,
+        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
+      ).then((r) => (r.ok ? r.json().then((rows) => ({ data: rows[0] })) : { data: null })),
+      2500
+    );
+    if (!data || data.is_active === false) return null;
+    return {
+      title: `${data.title} — Dr Tim's Tutorials on UniMap`,
+      description: `${[data.category, data.mode].filter(Boolean).join(" · ")} — NGN ${Number(data.full_price_ngn || 0).toLocaleString("en-NG")}${data.discount_percent ? ` (${data.discount_percent}% off on premium)` : ""}.`,
+      image: BRAND.image,
+    };
+  }
+
+  if (pathname === "/tutorials") {
+    return { ...BRAND, title: "Dr Tim's Tutorials on UniMap" };
   }
   return null;
 }
@@ -130,7 +172,7 @@ export default async function handler(request, context) {
     const canonical = `https://my-uni-map.com${url.pathname}${url.search}`;
     let tags = { ...BRAND };
     try {
-      tags = (await resolveEntity(url.pathname)) || { ...BRAND };
+      tags = (await resolveEntity(url.pathname, url.searchParams)) || { ...BRAND };
     } catch {
       tags = { ...BRAND };
     }
@@ -148,5 +190,15 @@ export default async function handler(request, context) {
 }
 
 export const config = {
-  path: ["/single-location/*", "/business-profile/*", "/announcement/*", "/signup"],
+  path: [
+    "/single-location/*",
+    "/business-profile/*",
+    "/announcement/*",
+    "/campus-history/*",
+    "/signup",
+    "/subscription",
+    "/download",
+    "/tutorials",
+    "/tutorials/*",
+  ],
 };

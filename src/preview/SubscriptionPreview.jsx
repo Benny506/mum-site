@@ -1,21 +1,10 @@
 import PreviewCTAs from "./PreviewCTAs";
-
-const FREE_FOREVER = [
-  "Map & navigation",
-  "Search, Discover & region browsing",
-  "Chat with anyone",
-  "Tags, ratings & giving reviews",
-  "Receiving pings",
-  "10 Owl answers a day",
-];
-
-const PREMIUM_UNLOCKS = [
-  "Higher Owl limit",
-  "Unlimited ping sends",
-  "Full history, reviews & key insights",
-  "Unlimited schedules with every repeat",
-  "No ads",
-];
+import {
+  FREE_FOREVER,
+  PREMIUM_UNLOCKS,
+  PRICE_LINE,
+  GRACE_NOTE,
+} from "./subscriptionPlanCopy";
 
 export default function SubscriptionPreview({ route }) {
   return (
@@ -42,10 +31,14 @@ export default function SubscriptionPreview({ route }) {
           ))}
         </ul>
         <p className="mum-preview-sub">
-          NGN 500 / 30 days • NGN 200 / 7 days. No auto-renew.
+          {PRICE_LINE}
+        </p>
+        <p className="mum-preview-sub" style={{ fontSize: 13, opacity: 0.85 }}>
+          {GRACE_NOTE}
         </p>
         <PreviewCTAs
-          deepUrl="https://my-uni-map.com/subscription"
+          deepUrl={typeof window !== "undefined" ? window.location.href : "https://my-uni-map.com/subscription"}
+          entityUrl={typeof window !== "undefined" ? window.location.href : "https://my-uni-map.com/subscription"}
           route={route}
           entityType="subscription"
         />

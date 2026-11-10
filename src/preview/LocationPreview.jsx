@@ -43,7 +43,7 @@ export default function LocationPreview({ location, route }) {
         )}
         {location?.description && <p className="mum-preview-sub">{location.description}</p>}
         <p className="mum-preview-sub">Open this place in the UniMap app to navigate, pin, and review it.</p>
-        <PreviewCTAs deepUrl={deepUrl} route={route} entityType="location" />
+        <PreviewCTAs deepUrl={deepUrl} entityUrl={deepUrl} route={route} entityType="location" />
       </div>
     </div>
   );

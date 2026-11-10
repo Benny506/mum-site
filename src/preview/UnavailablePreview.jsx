@@ -23,6 +23,21 @@ const COPY = {
     title: "This announcement is no longer available",
     sub: "The shared announcement may have been removed. Get the app to see the latest campus news.",
   },
+  history: {
+    eyebrow: "Shared campus story",
+    title: "This story is no longer available",
+    sub: "The shared history story may have been removed. Get the app to explore UNICAL moments and VC records.",
+  },
+  tutorial: {
+    eyebrow: "Shared tutorial",
+    title: "This tutorial is no longer available",
+    sub: "The shared tutorial session may have ended or been removed. Get the app to see current Dr Tim sessions.",
+  },
+  subscription: {
+    eyebrow: "MyUniMap Premium",
+    title: "Subscription preview unavailable",
+    sub: "Check your connection and try again, or get the app to see premium plans.",
+  },
   network: {
     eyebrow: "Connection issue",
     title: "Preview could not load",
@@ -32,6 +47,8 @@ const COPY = {
 
 export default function UnavailablePreview({ kind = "location", route, entityType, onRetry }) {
   const copy = COPY[kind] || COPY.location;
+  const deepUrl =
+    typeof window !== "undefined" ? window.location.href : APP_DOWNLOAD_URL;
   return (
     <div className="mum-preview-card">
       <div className="mum-preview-body mum-preview-state">
@@ -48,7 +65,7 @@ export default function UnavailablePreview({ kind = "location", route, entityTyp
               Try again
             </button>
           )}
-          <PreviewCTAs deepUrl={APP_DOWNLOAD_URL} route={route} entityType={entityType} />
+          <PreviewCTAs deepUrl={deepUrl} entityUrl={deepUrl} route={route} entityType={entityType} />
           <Link className="mum-preview-link" to="/">
             Back to home
           </Link>

@@ -72,7 +72,7 @@ export default function BusinessPreview({ profile, route }) {
             . See more inside the app.
           </p>
         )}
-        <PreviewCTAs deepUrl={deepUrl} route={route} entityType="business" />
+        <PreviewCTAs deepUrl={deepUrl} entityUrl={deepUrl} route={route} entityType="business" />
       </div>
     </div>
   );
