@@ -7,7 +7,7 @@ import AnnouncementPreview from "./AnnouncementPreview";
 import HistoryPreview from "./HistoryPreview";
 import ReferralPreview from "./ReferralPreview";
 import SubscriptionPreview from "./SubscriptionPreview";
-import TutorialPreview from "./TutorialPreview";
+// TEMP-DRTIM-OFF: import TutorialPreview from "./TutorialPreview";
 import UnavailablePreview from "./UnavailablePreview";
 import { fetchLocationPreview, fetchBusinessPreview, fetchAnnouncementPreview, fetchTutorialPreview, fetchTutorialListPreview, locationCoverUrl, businessOgImageUrl, announcementBannerUrl } from "./previewData";
 import { fetchHistoryPreview } from "./historyPreviewData";
@@ -53,9 +53,9 @@ export default function DeepLinkGate({ type }) {
           ? params.announcement_id
           : type === "history"
             ? params.moment_id
-            : type === "tutorial"
-              ? params.session_key
-              : null;
+            // TEMP-DRTIM-OFF: : type === "tutorial"
+            // TEMP-DRTIM-OFF:   ? params.session_key
+            : null;
   const refCode = type === "referral" ? searchParams.get("ref") : null;
 
   useEffect(() => {
@@ -83,23 +83,24 @@ export default function DeepLinkGate({ type }) {
       return undefined;
     }
 
-    if (type === "tutorial-list") {
-      const runList = async () => {
-        const res = await fetchTutorialListPreview();
-        if (cancelled) return;
-        if (res.status === "ok") {
-          trackPreviewView({ route, entityType: "tutorial", status: "ok" });
-          setMeta("Dr Tim's Tutorials on UniMap", BRAND_DESC, null);
-        } else {
-          trackPreviewView({ route, entityType: "tutorial", status: res.status });
-          trackUnavailableView({ route, entityType: "tutorial", reason: res.reason });
-          setMeta(BRAND_TITLE, BRAND_DESC);
-        }
-        setState(res);
-      };
-      runList();
-      return undefined;
-    }
+    // TEMP-DRTIM-OFF: tutorial-list preview hidden until discount finalized
+    // if (type === "tutorial-list") {
+    //   const runList = async () => {
+    //     const res = await fetchTutorialListPreview();
+    //     if (cancelled) return;
+    //     if (res.status === "ok") {
+    //       trackPreviewView({ route, entityType: "tutorial", status: "ok" });
+    //       setMeta("Dr Tim's Tutorials on UniMap", BRAND_DESC, null);
+    //     } else {
+    //       trackPreviewView({ route, entityType: "tutorial", status: res.status });
+    //       trackUnavailableView({ route, entityType: "tutorial", reason: res.reason });
+    //       setMeta(BRAND_TITLE, BRAND_DESC);
+    //     }
+    //     setState(res);
+    //   };
+    //   runList();
+    //   return undefined;
+    // }
 
     const run = async () => {
       const res =
@@ -109,9 +110,9 @@ export default function DeepLinkGate({ type }) {
             ? await fetchBusinessPreview(id)
             : type === "history"
               ? await fetchHistoryPreview(id)
-              : type === "tutorial"
-                ? await fetchTutorialPreview(id)
-                : await fetchAnnouncementPreview(id);
+              // TEMP-DRTIM-OFF: : type === "tutorial"
+              // TEMP-DRTIM-OFF:   ? await fetchTutorialPreview(id)
+              : await fetchAnnouncementPreview(id);
       if (cancelled) return;
       const entityType = type === "location" ? "location" : type === "business" ? "business" : type === "history" ? "history" : type === "tutorial" ? "tutorial" : "announcement";
       if (res.status === "ok") {
@@ -125,14 +126,14 @@ export default function DeepLinkGate({ type }) {
               ? businessOgImageUrl(res.data)
               : type === "history"
                 ? null
-                : type === "tutorial"
-                  ? null
-                  : announcementBannerUrl(res.data);
+                // TEMP-DRTIM-OFF: : type === "tutorial"
+                // TEMP-DRTIM-OFF:   ? null
+                : announcementBannerUrl(res.data);
         const excerpt = (type === "announcement" || type === "history") && (res.data.body || res.data.tldr)
           ? String(res.data.body || res.data.tldr).slice(0, 200)
-          : type === "tutorial"
-            ? `${[res.data.category, res.data.mode].filter(Boolean).join(" · ")} — NGN ${Number(res.data.full_price_ngn || 0).toLocaleString("en-NG")}`
-            : res.data.description;
+          // TEMP-DRTIM-OFF: : type === "tutorial"
+          // TEMP-DRTIM-OFF:   ? `${[res.data.category, res.data.mode].filter(Boolean).join(" · ")} — NGN ${Number(res.data.full_price_ngn || 0).toLocaleString("en-NG")}`
+          : res.data.description;
         setMeta(`${title} on UniMap`, excerpt || BRAND_DESC, image);
       } else {
         trackPreviewView({ route, entityType, status: res.status });
@@ -178,15 +179,17 @@ export default function DeepLinkGate({ type }) {
         {state.status === "ok" && type === "history" && (
           <HistoryPreview moment={state.data} route={route} />
         )}
+        {/* TEMP-DRTIM-OFF: tutorial previews hidden until discount finalized
         {state.status === "ok" && type === "tutorial" && (
           <TutorialPreview session={state.data} route={route} variant="detail" />
         )}
         {state.status === "ok" && type === "tutorial-list" && (
           <TutorialPreview sessions={state.data} route={route} variant="list" />
         )}
+        */}
         {state.status === "unavailable" && (
           <UnavailablePreview
-            kind={type === "business" ? "business" : type === "referral" ? "referral" : type === "announcement" ? "announcement" : type === "history" ? "history" : type === "tutorial" || type === "tutorial-list" ? "tutorial" : type === "subscription" ? "subscription" : "location"}
+            kind={type === "business" ? "business" : type === "referral" ? "referral" : type === "announcement" ? "announcement" : type === "history" ? "history" : type === "subscription" ? "subscription" : "location"}
             route={route}
             entityType={type}
             onRetry={undefined}

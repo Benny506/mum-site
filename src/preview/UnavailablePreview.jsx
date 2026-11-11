@@ -28,11 +28,11 @@ const COPY = {
     title: "This story is no longer available",
     sub: "The shared history story may have been removed. Get the app to explore UNICAL moments and VC records.",
   },
-  tutorial: {
-    eyebrow: "Shared tutorial",
-    title: "This tutorial is no longer available",
-    sub: "The shared tutorial session may have ended or been removed. Get the app to see current Dr Tim sessions.",
-  },
+  // TEMP-DRTIM-OFF: tutorial: {
+  //   eyebrow: "Shared tutorial",
+  //   title: "This tutorial is no longer available",
+  //   sub: "The shared tutorial session may have ended or been removed. Get the app to see current Dr Tim sessions.",
+  // },
   subscription: {
     eyebrow: "MyUniMap Premium",
     title: "Subscription preview unavailable",

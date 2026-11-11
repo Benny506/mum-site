@@ -124,26 +124,27 @@ async function resolveEntity(pathname, searchParams) {
     };
   }
 
-  const tut = pathname.match(/^\/tutorials\/([^/?#]+)/);
-  if (tut) {
-    const { data } = await withTimeout(
-      fetch(
-        `${SUPABASE_URL}/rest/v1/tutorial_sessions?session_key=eq.${encodeURIComponent(tut[1])}&select=session_key,title,category,mode,full_price_ngn,discount_percent,is_active`,
-        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
-      ).then((r) => (r.ok ? r.json().then((rows) => ({ data: rows[0] })) : { data: null })),
-      2500
-    );
-    if (!data || data.is_active === false) return null;
-    return {
-      title: `${data.title} — Dr Tim's Tutorials on UniMap`,
-      description: `${[data.category, data.mode].filter(Boolean).join(" · ")} — NGN ${Number(data.full_price_ngn || 0).toLocaleString("en-NG")}${data.discount_percent ? ` (${data.discount_percent}% off on premium)` : ""}.`,
-      image: BRAND.image,
-    };
-  }
+  // TEMP-DRTIM-OFF: tutorial OG hidden until discount finalized
+  // const tut = pathname.match(/^\/tutorials\/([^/?#]+)/);
+  // if (tut) {
+  //   const { data } = await withTimeout(
+  //     fetch(
+  //       `${SUPABASE_URL}/rest/v1/tutorial_sessions?session_key=eq.${encodeURIComponent(tut[1])}&select=session_key,title,category,mode,full_price_ngn,discount_percent,is_active`,
+  //       { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
+  //     ).then((r) => (r.ok ? r.json().then((rows) => ({ data: rows[0] })) : { data: null })),
+  //     2500
+  //   );
+  //   if (!data || data.is_active === false) return null;
+  //   return {
+  //     title: `${data.title} — Dr Tim's Tutorials on UniMap`,
+  //     description: `${[data.category, data.mode].filter(Boolean).join(" · ")} — NGN ${Number(data.full_price_ngn || 0).toLocaleString("en-NG")}${data.discount_percent ? ` (${data.discount_percent}% off on premium)` : ""}.`,
+  //     image: BRAND.image,
+  //   };
+  // }
 
-  if (pathname === "/tutorials") {
-    return { ...BRAND, title: "Dr Tim's Tutorials on UniMap" };
-  }
+  // if (pathname === "/tutorials") {
+  //   return { ...BRAND, title: "Dr Tim's Tutorials on UniMap" };
+  // }
   return null;
 }
 
@@ -206,7 +207,7 @@ export const config = {
     "/signup",
     "/subscription",
     "/download",
-    "/tutorials",
-    "/tutorials/*",
+    // TEMP-DRTIM-OFF: "/tutorials",
+    // TEMP-DRTIM-OFF: "/tutorials/*",
   ],
 };

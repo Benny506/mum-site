@@ -67,24 +67,25 @@ export const DEEP_LINKS = [
     ogBranch: "brand",
     native: { https: true, customSchemes: [] },
   },
-  {
-    key: "tutorials-list",
-    pathPattern: "/tutorials",
-    previewType: "tutorial-list",
-    rewrite: "/tutorials    /index.html   200",
-    hashShim: true,
-    ogBranch: "brand",
-    native: { https: true, customSchemes: ["unimap://tutorials", "my-uni-map://tutorials"] },
-  },
-  {
-    key: "tutorial-detail",
-    pathPattern: "/tutorials/:session_key",
-    previewType: "tutorial",
-    rewrite: "/tutorials/*    /index.html   200",
-    hashShim: true,
-    ogBranch: "brand-with-title",
-    native: { https: true, customSchemes: ["unimap://tutorials", "my-uni-map://tutorials"] },
-  },
+  // TEMP-DRTIM-OFF: tutorials-list hidden until discount finalized
+  // {
+  //   key: "tutorials-list",
+  //   pathPattern: "/tutorials",
+  //   previewType: "tutorial-list",
+  //   rewrite: "/tutorials    /index.html   200",
+  //   hashShim: true,
+  //   ogBranch: "brand",
+  //   native: { https: true, customSchemes: ["unimap://tutorials", "my-uni-map://tutorials"] },
+  // },
+  // {
+  //   key: "tutorial-detail",
+  //   pathPattern: "/tutorials/:session_key",
+  //   previewType: "tutorial",
+  //   rewrite: "/tutorials/*    /index.html   200",
+  //   hashShim: true,
+  //   ogBranch: "brand-with-title",
+  //   native: { https: true, customSchemes: ["unimap://tutorials", "my-uni-map://tutorials"] },
+  // },
 ];
 
 export const KNOWN_HASH_PREFIXES = [
@@ -95,6 +96,6 @@ export const KNOWN_HASH_PREFIXES = [
   "/campus-history/",
   "/signup",
   "/subscription",
-  "/tutorials",
-  "/tutorials/",
+  // TEMP-DRTIM-OFF: "/tutorials",
+  // TEMP-DRTIM-OFF: "/tutorials/",
 ];

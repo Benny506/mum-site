@@ -24,7 +24,7 @@ export const PREMIUM_UNLOCKS = [
   "Full question bank with answers",
   "Timed practice exams with instant marking",
   "My Spots — your private campus pins",
-  "Dr Tim tutorial discounts when you pay in-app",
+  // TEMP-DRTIM-OFF: "Dr Tim tutorial discounts when you pay in-app",
   "No ads",
 ];
 

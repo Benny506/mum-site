@@ -24,7 +24,7 @@ function HashShim() {
       target.startsWith("/business-profile/") ||
       target.startsWith("/announcement/") ||
       target.startsWith("/campus-history/") ||
-      target.startsWith("/tutorials") ||
+      // TEMP-DRTIM-OFF: target.startsWith("/tutorials") ||
       target === "/subscription" ||
       target.startsWith("/subscription?") ||
       target.startsWith("/signup");
@@ -86,11 +86,13 @@ function App() {
           />
           <Route path="/signup" element={<DeepLinkGate type="referral" />} />
           <Route path="/subscription" element={<DeepLinkGate type="subscription" />} />
+          {/* TEMP-DRTIM-OFF: tutorial routes hidden until discount finalized
           <Route path="/tutorials" element={<DeepLinkGate type="tutorial-list" />} />
           <Route
             path="/tutorials/:session_key"
             element={<DeepLinkGate type="tutorial" />}
           />
+          */}
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
