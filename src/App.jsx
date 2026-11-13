@@ -3,6 +3,8 @@ import "./App.css";
 import ScrollToTop from "./components/scroll/ScrollToTop";
 import Home from "./components/home/home";
 import DeepLinkGate from "./preview/DeepLinkGate";
+import Fve311Page from "./fve311/Fve311Page";
+import Fve311ListPage from "./fve311/Fve311ListPage";
 import { useEffect } from "react";
 import Lenis from "lenis";
 
@@ -20,6 +22,8 @@ function HashShim() {
     }
     const known =
       target === "/download" ||
+      target === "/fve311" ||
+      target === "/fve311/list" ||
       target.startsWith("/single-location/") ||
       target.startsWith("/business-profile/") ||
       target.startsWith("/announcement/") ||
@@ -86,6 +90,8 @@ function App() {
           />
           <Route path="/signup" element={<DeepLinkGate type="referral" />} />
           <Route path="/subscription" element={<DeepLinkGate type="subscription" />} />
+          <Route path="/fve311" element={<Fve311Page />} />
+          <Route path="/fve311/list" element={<Fve311ListPage />} />
           {/* TEMP-DRTIM-OFF: tutorial routes hidden until discount finalized
           <Route path="/tutorials" element={<DeepLinkGate type="tutorial-list" />} />
           <Route
